@@ -1,5 +1,5 @@
 // Classe POST
-class dbPosts { 
+class Posts { 
     constructor(authorPost, postTitle, postText, postDate) {
         this.authorPost = authorPost
         this.postTitle = postTitle
@@ -9,6 +9,8 @@ class dbPosts {
         
     }
 }
+
+let dbPosts = []
 
 // Variáveis de Post
 const authorPost, postTitle, postDate, postText
@@ -20,6 +22,27 @@ postTitle = document.getElementById('input-title').value
 postDate = new Date()
 
 postText = document.getElementById('input-text').value
+
+// Função para salvar postsDatabase em localStorage
+
+function savePostsToLocalStorage() {
+
+    const postsJSON = JSON.stringify(dbPosts);
+    localStorage.setItem('dbPosts', postsJSON);
+
+}
+
+// Função para carregar dbPosts de localStorage
+function loadPostsFromLocalStorage() {
+    const postsJSON = localStorage.getItem('dbPosts');
+    if (postsJSON) {
+        const postsArray = JSON.parse(postsJSON);
+        dbPosts
+    }
+}
+
+
+
 
 
 // Classe Comentário
@@ -68,16 +91,46 @@ const btnAddPost = document.getElementById("btnAddPost")
 btnAddPost.addEventListener("click", addPost)
 
 function addPost(){
-    const newPost = new dbPosts(authorPost, )
-    
+
+    const newPost = new Posts(authorPost, postTitle, postText, postDate)
+
+    dbPosts.push(newPost)
+    savePostsToLocalStorage()
 
 
 }
 
+// Fazer o append do novo post
+
 function appendPost() {
 
+    const conteinerPost = document.createElement('div');
+    conteinerPost.className = 'conteiner-post';
 
+    const sectionPost = document.getElementById('section-post');
+    sectionPost.appendChild(conteinerPost);
 
+    const divTitlePost = document.createElement('h1');
+    divTitlePost.className = 'post-title'
+    conteinerPost.appendChild(divTitlePost)
+    divTitlePost.textContent = postTitle
+
+    const divAuthorPost = document.createElement('h2');
+    divAuthorPost.className = 'post-author'
+    conteinerPost.appendChild(divAuthorPost)
+    divAuthorPost.textContent = authorPost
+
+    const divDatePost = document.createElement('p');
+    divDatePost.className = 'post-date'
+    conteinerPost.appendChild(divDatePost)
+    divDatePost.textContent = postDate
+
+    const divTextPost = document.createElement('p');
+    divTextPost.className = 'post-text'
+    conteinerPost.appendChild(divTextPost)
+    divTextPost.textContent = postText
+
+   
 }
 
 
