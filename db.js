@@ -47,7 +47,7 @@ function loadPostsFromLocalStorage() {
 
 // Classe Comentário
 
-class dbComment {
+class Comment {
     constructor(authorComment, textComment, commentDate, post){
         this.authorComment = authorComment
         this.textComment = textComment
@@ -55,6 +55,8 @@ class dbComment {
         this.post = post
     }
 }
+
+let dbComment = []
 
 // Variáveis de Comentários
 
@@ -136,6 +138,46 @@ function appendPost() {
 
 
 // Adicionar Comentário botão 
+const btnComment = document.addEventListener('click', addComment)
+
+function addComent() {
+    const newComment = new Comment(authorComment, textComment, commentDate, newPost)
+
+    dbComment.push(newComment)
+    saveCommentToLocalStorage()
+
+}
+
+// Função de salvar comentário no local storage
+
+function saveCommentToLocalStorage() {
+
+    const commentJSON = JSON.stringify(dbComment);
+    localStorage.setItem('dbComment', commentJSON);
+    
+} 
+    // Função para carregar dbcomment
+
+function loadCommentFromLocalStorage() {
+    const commentJSON = localStorage.getItem('dbComment');
+    if (commentJSON) {
+        const commentArray = JSON.parse(commentJSON);
+        dbComment
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 // adiciona comentário ao atributo comentário da classe post e faz um append a div do post
 
 
